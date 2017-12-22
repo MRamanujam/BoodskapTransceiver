@@ -1,0 +1,12 @@
+BoodskapCommunicator	KEYWORD1
+BoodskapTransceiver	KEYWORD1
+BoodskapUdpCommunicator	KEYWORD1
+Storage	KEYWORD1
+format	KEYWORD2
+writeFile	KEYWORD2
+readFile	KEYWORD2
+sendData	KEYWORD2
+setHandleData	KEYWORD2
+setHandleMessage	KEYWORD2
+isConnected	KEYWORD2
+sendMessage	KEYWORD2
