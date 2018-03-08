@@ -50,10 +50,14 @@ DHT dht(DHTPIN, DHTTYPE);
 uint32_t lastReport = 0;
 
 void sendReading();
+void handleData(byte* data);
+bool handleMessage(uint16_t messageId, JsonObject& header, JsonObject& data);
 
 void setup() {
 
   Serial.begin(115200);
+  Boodskap.setHandleData(&handleData);
+  Boodskap.setHandleMessage(&handleMessage);
 
   StaticJsonBuffer<CONFIG_SIZE> buffer;
   JsonObject &config = buffer.createObject();
@@ -145,3 +149,11 @@ void sendReading() {
   Boodskap.sendMessage(MESSAGE_ID, data);
 }
 
+void handleData(byte* data) {
+  //handle raw data from the platform
+}
+
+bool handleMessage(uint16_t messageId, JsonObject& header, JsonObject& data){
+   //handle JSON commands from the platform
+  return false; //return true if you have successfully handled the message
+}

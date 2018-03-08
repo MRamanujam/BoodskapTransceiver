@@ -272,7 +272,13 @@ void BoodskapTransceiver::sendAck(JsonObject& header, uint32_t corrId, int ack)
   root["header"] = header;
   root["data"] = data;
 
-  sendMessage(MSG_ACK, root);
+  String str;
+  root.printTo(str);
+  DEBUG.printf("Sending ACK %s\n", str.c_str());
+
+  if (_comm->sendData(root)) {
+    _lastSent = millis();
+  }
 
 }
 
@@ -432,7 +438,8 @@ void BoodskapTransceiver::parseIncoming(byte *data)
         sendHeartbeat();
         break;
       case MSG_ACK:
-        DEBUG.println("Message deliverd and acked");
+        ack = true;
+        DEBUG.println("Message Delivery Confirmed");
         break;
       case MSG_FACTORY_RESET:
         ack = _factoryResetRequested = true;
